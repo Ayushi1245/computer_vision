@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Virtual Painter</title>
+    <style>
+        /* Set blurred background image on body */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            font-family: 'Segoe UI', sans-serif;
+            background: url("https://i.pinimg.com/736x/22/d2/0d/22d20d36f2e059e377122e4cefb41a8e.jpg") no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Add a blur overlay */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            backdrop-filter: blur(8px);
+            background-color: rgba(255, 255, 255, 0.2); /* optional tint */
+            z-index: 0;
+        }
+
+        /* Main container styling */
+        .container {
+            position: relative;
+            background: linear-gradient(135deg, #d0f0fd, #e0c3fc);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            z-index: 1;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: #333;
+        }
+
+        .container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            color: #4b0082; /* Changed for contrast with lighter background */
+            margin-bottom: 15px;
+            font-size: 2.2em;
+        }
+
+        p {
+            font-weight: bold;
+            color: #222;
+        }
+
+        ul {
+            text-align: left;
+            margin-top: 20px;
+            padding-left: 20px;
+            color: #333;
+        }
+
+        li {
+            margin: 12px 0;
+            font-size: 1.1em;
+        }
+
+        .button {
+            background: linear-gradient(to right, #7de2fc, #b9b6e5);
+            border: none;
+            color: white;
+            padding: 14px 30px;
+            font-size: 16px;
+            margin: 20px 10px 0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.4s ease, transform 0.2s ease;
+        }
+
+        .button:hover {
+            background: linear-gradient(to right, #56ccf2, #a088e8);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+       <h1>🐱 Welcome to MeowCV!</h1>
+
+    <p><strong>How it works:</strong></p>
+    <ul>
+        <li>😲 Open your eyes wide to trigger the <strong>Shocked Cat</strong>.</li>
+        <li>👅 Open your mouth to show the <strong>Tongue Cat</strong>.</li>
+        <li>😾 Squint your eyes to activate the <strong>Angry Cat</strong>.</li>
+        <li>🙂 Relax your face to see the <strong>Normal Cat</strong>.</li>
+    </ul>
+
+        <button class="button" onclick="startcv()">🎨 Start MeowCV</button>
+        <button class="button" onclick="stopcv()">🛑 Stop Camera</button>
+    </div>
+
+    <script>
+        function startcv() {
+            fetch('/start')
+                .then(res => res.text())
+                .then(alert)
+                .catch(err => alert("Error: " + err));
+        }
+
+        function stopcv() {
+            fetch('/stop')
+                .then(res => res.text())
+                .then(alert)
+                .catch(err => alert("Error: " + err));
+        }
+    </script>
+</body>
+</html>
